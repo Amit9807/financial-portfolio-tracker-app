@@ -12,7 +12,7 @@ class Table extends Component {
 
    componentDidMount() {
 
-      axios.get(`https://amit-204bf.firebaseio.com/active.json`)
+      axios.get(`https://ga-fpt.firebaseio.com/active.json`)
          .then(res => {
             const stocks = res.data;
             this.setState({
@@ -24,7 +24,7 @@ class Table extends Component {
    componentWillUpdate(){
       // console.log('update triggered');
 
-      axios.get(`https://amit-204bf.firebaseio.com/active.json`)
+      axios.get(`https://ga-fpt.firebaseio.com/active.json`)
          .then(res => {
             const stocks = res.data;
 
@@ -47,9 +47,9 @@ class Table extends Component {
       console.log(event.target.id + ' button');
       var id = event.target.id;
 
-      axios.delete(`https://amit-204bf.firebaseio.com/active/${id}.json`);
+      axios.delete(`https://ga-fpt.firebaseio.com/active/${id}.json`);
 
-      axios.post('https://amit-204bf.firebaseio.com/allStocks.json', {
+      axios.post('https://ga-fpt.firebaseio.com/allStocks.json', {
          symbol: this.state.data[id].symbol,
          name: this.state.data[id].name
       })
@@ -58,9 +58,10 @@ class Table extends Component {
    render() {
 
       return (
-         <div id="mystocks">
+
+         <div className="MyStocks" id="mystocks">
             <h2>My Stocks</h2>
-            <table>
+            <table className="MyStocksTable">
                <thead>
                   <tr>
                      <th>Stock Symbol</th>
@@ -90,7 +91,7 @@ class Table extends Component {
                               buyprice={this.state.data[key].buyprice}
                               share={this.state.data[key].share} />
                            <td>
-                              <button id={key} onClick={this.handleDelete}>Stop Tracking</button>
+                              <button className="StopTrackingBtn" id={key} onClick={this.handleDelete}>Stop Tracking</button>
                            </td>
                         </tr>
                      })

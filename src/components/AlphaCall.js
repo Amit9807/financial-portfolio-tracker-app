@@ -18,9 +18,9 @@ class AlphaCall extends Component {
 
       {/* profit/loss || (current price – buy price) * no. of shares. */}
 
-      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=I91RP6SM9ABGUJ3T`)
+      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=T7J1F5I5KGXWNML8`)
          .then(res => {
-            
+
             var current = res.data['Time Series (Daily)'][date]['4. close'];
 
             var margin = ((current - buyprice)*share); // profit and loss logic!

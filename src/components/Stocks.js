@@ -19,7 +19,7 @@ class Stocks extends Component {
 
    componentDidMount() {
 
-      axios.get(`https://amit-204bf.firebaseio.com/allStocks.json`)
+      axios.get(`https://ga-fpt.firebaseio.com/allStocks.json`)
          .then(res => {
             const stocks = res.data;
             this.setState({
@@ -30,7 +30,7 @@ class Stocks extends Component {
 
    componentWillUpdate() {
 
-      axios.get(`https://amit-204bf.firebaseio.com/allStocks.json`)
+      axios.get(`https://ga-fpt.firebaseio.com/allStocks.json`)
          .then(res => {
             const stocks = res.data;
             this.setState({
@@ -69,6 +69,7 @@ class Stocks extends Component {
    postData = (e) => {
 
       e.preventDefault();
+
       var id = e.target.id;
       console.log('button is id' + id);
 
@@ -92,14 +93,13 @@ class Stocks extends Component {
          alert('The date for Sunday change to Friday');
 
       } else {
-         console.log('pass');
          date = x.toISOString();
          date = date.slice(0, 10);
       }
 
-       // End of Data Validation
+      // End of Data Validation
 
-      axios.post('https://amit-204bf.firebaseio.com/active.json', {
+      axios.post('https://ga-fpt.firebaseio.com/active.json', {
          symbol: this.state.symbol,
          name: this.state.name,
          share: this.state.share,
@@ -119,21 +119,21 @@ class Stocks extends Component {
          show: false
       });
 
-      axios.delete(`https://amit-204bf.firebaseio.com/allStocks/${id}.json`);
+      axios.delete(`https://ga-fpt.firebaseio.com/allStocks/${id}.json`);
    }
 
    render() {
 
       return (
          <>
-            <div id="addstocks">
+            <div className="AddStocksTitle" id="addstocks">
                <h2>Add Stocks to my Stocks</h2>
 
                {
                   (this.state.data == null) ? (<h3>ALL STOCKS ADDED</h3>) : (
                      Object.keys(this.state.data).map((key) => {
                         return <div key={key}>
-                           <button id={key} onClick={this.showModal} name={this.state.data[key].name}>{this.state.data[key].symbol}</button>
+                           <button className="StockButton" id={key} onClick={this.showModal} name={this.state.data[key].name}>{this.state.data[key].symbol}</button>
                            <span>{this.state.data[key].name}</span>
                         </div>
                      })
@@ -164,22 +164,22 @@ class Stocks extends Component {
                         </div>
                         <div>
                            <p>No. of Shares: </p>
-                           <input type="text" placeholder="No. of Shares" name="share" onChange={(e) => { this.handleChange(e) }} required />
+                           <input id="noShares" type="number" placeholder="No. of Shares" name="share" onChange={(e) => { this.handleChange(e) }} required />
                         </div>
                         <div>
                            <p>Buy Price:</p>
-                           <input type="text" placeholder="Buying Price" name="buyprice" onChange={(e) => { this.handleChange(e) }} required />
+                           <input id="buyPrice" type="number" placeholder="Buying Price" name="buyprice" onChange={(e) => { this.handleChange(e) }} required />
                         </div>
                         <div>
                            <p>Buy Date:</p>
-                           <input type="date" name="date" onChange={(e) => { this.handleChange(e) }} required />
+                           <input id="buyDate" type="date" name="date" onChange={(e) => { this.handleChange(e) }} required />
                         </div>
                      </div>
                      {/* <input type="submit" value="ADD"/> */}
                      <div className="modal-button">
                         <div>
                            {/* <button id={this.state.id} onClick={this.postData}>ADD</button> */}
-                           <button type="submit">ADD</button>
+                           <button className="AddButton" type="submit">Add</button>
                         </div>
                      </div>
                   </form>
